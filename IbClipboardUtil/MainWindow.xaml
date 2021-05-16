@@ -1,0 +1,13 @@
+﻿<Window x:Class="IbClipboardUtil.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IbClipboardUtil"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="651.325" Width="884.595">
+    <Grid Margin="0,0,2,1">
+        <Button x:Name="button1" RenderTransformOrigin="0.517,0.729" Margin="0,579,774,0" Click="button1_Click">刷新</Button>
+        <TextBox x:Name="texta" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" FontFamily="Consolas" HorizontalAlignment="Left" Width="865" Margin="0,0,0,56"/>
+    </Grid>
+</Window>
