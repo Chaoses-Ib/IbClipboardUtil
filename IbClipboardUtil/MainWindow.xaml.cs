@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
@@ -13,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ICSharpCode.AvalonEdit.Highlighting;
 using Ib.Windows.DataExchange;
 using IbClipboard = Ib.Windows.DataExchange.Clipboard;
 
@@ -25,28 +28,37 @@ namespace IbClipboardUtil
     {
         public MainWindow()
         {
+            IHighlightingDefinition highlighting;
+            using (XmlReader reader = new XmlTextReader(new StringReader(Properties.Resources.Highlighting)))
+            {
+                highlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.
+                    HighlightingLoader.Load(reader, HighlightingManager.Instance);
+            }
+
             InitializeComponent();
+            textEditor.SyntaxHighlighting = highlighting;
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
-            texta.Text = "";
+            StringBuilder str = new StringBuilder();
+
             IbClipboard.Open();
             foreach (var format in IbClipboard.GetFormats())
             {
                 byte[] data = format.GetData();
 
-                texta.Text += 
-$@"{(uint)format}{"\t"}{format.GetName()}
-{(data == null ? ""  :
+                str.Append(
+$@"{(uint)format, -5}  {format.GetName()} {{
+{(data == null ? "" :
 BitConverter.ToString(data, 0, Math.Min(data.Length, 4096)).Replace("-", " ")
 )}
-
-";
+}}
+");
             }
             IbClipboard.Close();
 
-            
+            textEditor.Text = str.ToString();
         }
     }
 }

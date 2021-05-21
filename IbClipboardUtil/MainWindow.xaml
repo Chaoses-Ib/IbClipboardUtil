@@ -5,9 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IbClipboardUtil"
         mc:Ignorable="d"
-        Title="MainWindow" Height="651.325" Width="884.595">
-    <Grid Margin="0,0,2,1">
-        <Button x:Name="button1" RenderTransformOrigin="0.517,0.729" Margin="0,579,774,0" Click="button1_Click">刷新</Button>
-        <TextBox x:Name="texta" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" FontFamily="Consolas" HorizontalAlignment="Left" Width="865" Margin="0,0,0,56"/>
+        Title="IbClipboardUtil" Height="651.325" Width="884.595">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <avalonEdit:TextEditor
+            xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+            Name="textEditor"
+            Grid.Row="0"
+            FontFamily="Consolas"
+            WordWrap="True" />
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="3">
+            <Button x:Name="btnRefresh" Click="btnRefresh_Click" Padding="3">Refresh</Button>
+        </StackPanel>
     </Grid>
 </Window>

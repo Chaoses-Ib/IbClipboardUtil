@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SyntaxDefinition name="ClipboardData"
+  xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+
+  <RuleSet>
+    <Span foreground="DimGray" multiline="true"
+          begin="{" end="}" />
+    <Rule foreground="Blue" fontWeight="bold">
+      ^[^{]+
+    </Rule>
+  </RuleSet>
+</SyntaxDefinition>
