@@ -29,10 +29,15 @@ namespace IbClipboardUtil
         public MainWindow()
         {
             IHighlightingDefinition highlighting;
-            using (XmlReader reader = new XmlTextReader(new StringReader(Properties.Resources.Highlighting)))
+            using(Stream s = typeof(MainWindow).Assembly.GetManifestResourceStream("IbClipboardUtil.Highlighting.xshd"))
             {
-                highlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.
-                    HighlightingLoader.Load(reader, HighlightingManager.Instance);
+                if (s == null)
+                    throw new InvalidOperationException("Could not find embedded resource");
+                using (XmlReader reader = new XmlTextReader(s))
+                {
+                    highlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.
+                        HighlightingLoader.Load(reader, HighlightingManager.Instance);
+                }
             }
 
             InitializeComponent();
